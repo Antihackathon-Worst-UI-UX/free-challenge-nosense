@@ -80,33 +80,63 @@
         document.getElementById('registroForm').style.display = 'block';
     });
     function crearTeclado(letras, contenedorId, inputId) {
-    const contenedor = document.getElementById(contenedorId);
-    const input = document.getElementById(inputId);
-    letras = letras.split("");
-    letras.sort(() => Math.random() - 0.5); // desordenar letras
-
-    letras.forEach(letra => {
-        const btn = document.createElement("button");
-        btn.innerText = letra;
-        btn.style.setProperty("--rand", Math.random());
-        btn.addEventListener("click", (e) => {
+        const contenedor = document.getElementById(contenedorId);
+        const input = document.getElementById(inputId);
+        letras = letras.split("");
+        letras.sort(() => Math.random() - 0.5); 
+    
+        let mayusculas = true; 
+    
+        const shiftBtn = document.createElement("button");
+        shiftBtn.innerText = "Shift";
+        shiftBtn.style.backgroundColor = "orange";
+        shiftBtn.addEventListener("click", (e) => {
             e.preventDefault();
-            input.value += letra;
+            mayusculas = !mayusculas;
+            actualizarTeclas();
         });
-        contenedor.appendChild(btn);
-    });
-}
-
-    // Teclado para Nombre (solo letras)
+        contenedor.appendChild(shiftBtn);
+    
+        const borrarBtn = document.createElement("button");
+        borrarBtn.innerText = "Borrar";
+        borrarBtn.style.backgroundColor = "red";
+        borrarBtn.addEventListener("click", (e) => {
+            e.preventDefault();
+            input.value = input.value.slice(0, -1);
+        });
+        contenedor.appendChild(borrarBtn);
+ 
+        const botones = [];
+        letras.forEach(letra => {
+            const btn = document.createElement("button");
+            btn.style.setProperty("--rand", Math.random());
+            btn.addEventListener("click", (e) => {
+                e.preventDefault();
+                input.value += mayusculas ? letra.toUpperCase() : letra.toLowerCase();
+            });
+            botones.push(btn);
+            contenedor.appendChild(btn);
+        });
+    
+        function actualizarTeclas() {
+            letras.forEach((letra, i) => {
+                botones[i].innerText = mayusculas ? letra.toUpperCase() : letra.toLowerCase();
+            });
+        }
+    
+        actualizarTeclas();
+    }    
+    
     crearTeclado("ABCDEFGHIJKLMNOPQRSTUVWXYZ", "tecladoNombre", "nombre");
-    
-    // Teclado para Correo (letras + números + @ .)
     crearTeclado("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@._", "tecladoCorreo", "correo");
-    
-    // Teclado para Contraseña (letras + números + símbolos)
     crearTeclado("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()", "tecladoClave", "claveRegistro");
     
-    // Contadores infinitos
+    crearTeclado("ABCDEFGHIJKLMNOPQRSTUVWXYZ", "tecladoNombre", "nombre");
+    
+    crearTeclado("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@._", "tecladoCorreo", "correo");
+    
+    crearTeclado("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()", "tecladoClave", "claveRegistro");
+    
     function incrementar(campo) {
         let valor = parseInt(document.getElementById(campo).innerText);
         valor++;
