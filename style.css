@@ -16,12 +16,14 @@ header{
 	justify-content: center;
 	display: flex;
 	align-items: center;
-	height: 50%;
+	width: 100%;
 }
 
 .login-form{
 	color: antiquewhite;
-	padding: 2em;
+	padding: 3em; 
+    font-size: 1.2em;
+    width: 400px;
 }
 
 .login-form h2{
@@ -39,9 +41,11 @@ header{
 }
 
 .login-form input{
-	width: 100%;
+	width: 91%;
 	margin-top: 1em;
 	border-radius: 5px;
+	padding: 0.9em;
+    font-size: 1em;
 }
 
 .login-form button{
@@ -52,8 +56,73 @@ header{
 	margin-left: auto;
 	margin-right: auto;
 	display: block; 
+	padding: 0.8em 1.2em;
 }
 
 .login-form button:hover{
 	background: #acaeb1;
+}
+
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 999;
+    left: 0; top: 0;
+    width: 100%; height: 100%;
+    background-color: rgba(0,0,0,0.8);
+    justify-content: center;
+    align-items: center;
+}
+
+.modal-content {
+    background: white;
+    padding: 20px;
+    border-radius: 10px;
+    max-width: 350px;
+    text-align: center;
+}
+
+.modal-content p {
+    font-size: 1.1em;
+    margin: 15px 0;
+}
+
+.modal-content button {
+    background-color: red;
+    color: white;
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.modal-content button:hover {
+    background-color: darkred;
+}
+.teclado {
+    display: grid;
+    grid-template-columns: repeat(7, 1fr);
+    gap: 5px;
+    margin-top: 1em;
+}
+.teclado button {
+    padding: 10px;
+    font-size: 1em;
+    cursor: pointer;
+    background-color: hsl(calc(360 * var(--rand)), 70%, 50%);
+    border: none;
+    border-radius: 5px;
+    color: white;
+}
+.fecha {
+    display: flex;
+    align-items: center;
+    gap: 10px; /* separación entre label, número y botón */
+    margin: 0.5em 0;
+    font-size: 1.2em;
+}
+.fecha button {
+    padding: 5px 10px;
+    font-size: 1.2em;
+    cursor: pointer;
 }
