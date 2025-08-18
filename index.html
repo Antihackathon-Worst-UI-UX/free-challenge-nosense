@@ -51,7 +51,7 @@
               <button type="button" onclick="incrementar('anio')">+</button>
             </div>
         
-            <button type="submit">Registrarse</button>
+            <button id="btnRegistro">Registrarse</button>
         </form>
 
     
@@ -78,15 +78,18 @@
         document.getElementById('modal').style.display = 'none';
         document.getElementById('loginForm').style.display = 'none';
         document.getElementById('registroForm').style.display = 'block';
-    });
+    
+	    inicializarTeclados();
+	});
+
     function crearTeclado(letras, contenedorId, inputId) {
         const contenedor = document.getElementById(contenedorId);
         const input = document.getElementById(inputId);
         letras = letras.split("");
-        letras.sort(() => Math.random() - 0.5); 
+        letras.sort(() => Math.random() - 0.5);
     
         let mayusculas = true; 
-    
+
         const shiftBtn = document.createElement("button");
         shiftBtn.innerText = "Shift";
         shiftBtn.style.backgroundColor = "orange";
@@ -126,24 +129,67 @@
     
         actualizarTeclas();
     }    
+    function inicializarTeclados() {
+        document.getElementById("tecladoNombre").innerHTML = "";
+		document.getElementById("tecladoCorreo").innerHTML = "";
+		document.getElementById("tecladoClave").innerHTML = "";
+
+        crearTeclado("ABCDEFGHIJKLMNOPQRSTUVWXYZ", "tecladoNombre", "nombre");
+        crearTeclado("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@._", "tecladoCorreo", "correo");
+        crearTeclado("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()", "tecladoClave", "claveRegistro");
+	}
     
-    crearTeclado("ABCDEFGHIJKLMNOPQRSTUVWXYZ", "tecladoNombre", "nombre");
-    crearTeclado("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@._", "tecladoCorreo", "correo");
-    crearTeclado("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()", "tecladoClave", "claveRegistro");
     
-    crearTeclado("ABCDEFGHIJKLMNOPQRSTUVWXYZ", "tecladoNombre", "nombre");
-    
-    crearTeclado("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@._", "tecladoCorreo", "correo");
-    
-    crearTeclado("ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()", "tecladoClave", "claveRegistro");
-    
-    function incrementar(campo) {
+    function incrementar(campo) {//limitar por campo 31, 12, 2025
         let valor = parseInt(document.getElementById(campo).innerText);
         valor++;
         document.getElementById(campo).innerText = valor;
     }
-    
+     
+	const btnReg = document.getElementById("btnRegistro");
+	let rebotes = 0;
+	
+	btnReg.addEventListener("click", ()=> {
+		originalRect = btnReg.getBoundingClientRect();
+		originalParent = btnReg.parentElement;
+		btnReg.style.position = "fixed";
+	    let x = originalRect.left;
+	    let y = originalRect.top;
+	    let vx = 5;
+	    let vy = 5;
+		const ancho = window.innerWidth - btnReg.offsetWidth;
+		const alto = window.innerHeight -btnReg.offsetHeight;
+		let startTime = Date.now();
 
+		function rebotar() {
+			let tiempo = Date.now()- startTime;
+			if (x <= 0 || x >= ancho) vx *= -1;
+			if (y <= 0 || y >= alto) vy *= -1;
+			x += vx;
+			y += vy;
+            btnReg.style.left = x + "px";
+			btnReg.style.top = y + "px";
+			if (tiempo < 3000){
+				requestAnimationFrame(rebotar);
+			} else {
+				rebotes++;
+				if (rebotes < 5){
+					startTime = Date.now();
+					requestAnimationFrame(rebotar);
+				} else {
+					btnReg.style.position = "relative";
+					btnReg.style.left = "0px";
+              		btnReg.style.top = "0px";
+					guardarRegistro();
+				}
+			}
+		}
+		rebotar();
+	});
+	function guardarRegistro() {
+	  alert("Registro guardado");
+	}
+	
     </script>
 </body>
 </html>

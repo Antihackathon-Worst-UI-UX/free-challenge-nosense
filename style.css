@@ -109,7 +109,7 @@ header{
     padding: 10px;
     font-size: 1em;
     cursor: pointer;
-    background-color: hsl(calc(360 * var(--rand)), 70%, 50%);
+    background-color: #acaeb1;
     border: none;
     border-radius: 5px;
     color: white;
@@ -117,7 +117,7 @@ header{
 .fecha {
     display: flex;
     align-items: center;
-    gap: 10px; /* separación entre label, número y botón */
+    gap: 10px;
     margin: 0.5em 0;
     font-size: 1.2em;
 }
