@@ -271,11 +271,10 @@
             return;
         }
         if ((usuarioIngresado === datos.nombre || usuarioIngresado === datos.correo) && claveIngresada === datos.clave) {
-            alert("Inicio de sesión exitoso. ¡Bienvenido " + datos.nombre + "!");
-
-        } else {
-            alert("Usuario o contraseña incorrectos.");
-        }
+		    window.location.href = "patos.html";
+		} else {
+		    alert("Usuario o contraseña incorrectos.");
+		}
     });
     </script>
 </body>

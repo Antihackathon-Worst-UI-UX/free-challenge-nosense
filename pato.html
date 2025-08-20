@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+<title>Pato</title>
+</head>
+<body>
+<script>
+  const patoSrc = "src/pato.jpg";
+  const ancho = window.innerWidth;
+  const alto = window.innerHeight;
+
+  function crearPato() {
+    const pato = document.createElement("img");
+    pato.src = patoSrc;
+    pato.className = "pato";
+    pato.style.left = Math.random() * (ancho - 50) + "px";
+    pato.style.top = Math.random() * (alto - 50) + "px";
+    document.body.appendChild(pato);
+    setTimeout(() => pato.remove(), 8000);
+  }
+  setInterval(crearPato, 300);
+  for(let i=0; i<20; i++) crearPato();
+</script>
+</body>
+</html>

@@ -126,3 +126,10 @@ header{
     font-size: 1.2em;
     cursor: pointer;
 }
+.pato {
+  position: absolute;
+  width: 100px;
+  height: 100px;
+  pointer-events: none;
+  transition: transform 0.3s;
+}
